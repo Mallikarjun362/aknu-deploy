@@ -11,6 +11,10 @@ app.use(cors({ origin: "http://localhost:5174" }));
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
+app.get("/hello",(req,res) => {
+  res.send("Hello from expressjs")
+})
+
 app.post("/upload", upload.any(), (req, res) => {
   try {
     const fields = {};
