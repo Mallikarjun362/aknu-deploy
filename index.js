@@ -4,9 +4,10 @@ const fs = require("fs");
 const path = require("path");
 const cors = require("cors");
 const XLSX = require("xlsx");
+const serverless = require('serverless-http');
 
 const app = express();
-app.use(cors({ origin: "http://localhost:5174" }));
+app.use(cors({ origin: "*" }));
 
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
@@ -73,3 +74,5 @@ app.post("/upload", upload.any(), (req, res) => {
 });
 
 app.listen(3000, () => console.log("Server running on http://localhost:3000"));
+module.exports = app;
+module.exports.handler = serverless(app);
